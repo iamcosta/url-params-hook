@@ -1,0 +1,31 @@
+{
+  "name": "@iamcosta/url-params-hook",
+  "version": "1.0.0",
+  "description": "Map object props to url search parameters",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iamcosta/url-params-hook.git"
+  },
+  "keywords": [
+    "react",
+    "react-router-dom",
+    "hook"
+  ],
+  "author": "Iam Barroso",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/iamcosta/url-params-hook/issues"
+  },
+  "homepage": "https://github.com/iamcosta/url-params-hook#readme",
+  "devDependencies": {
+    "typescript": "^5.4.5"
+  },
+  "dependencies": {
+    "react-router-dom": "^6.23.1"
+  }
+}
