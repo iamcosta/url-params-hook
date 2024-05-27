@@ -5,7 +5,7 @@
 ## Installation
 
 ```bash
-npm install url-params-hook
+npm install @iamcosta/url-params-hook
 ```
 
 ## Usage
