@@ -11,7 +11,7 @@ npm install url-params-hook
 ## Usage
 
 ```ts
-import { useUrlParams } from "url-params-hook";
+import { useUrlParams } from  "@iamcosta/url-params-hook";
 
 // ...
 type YourType = {
