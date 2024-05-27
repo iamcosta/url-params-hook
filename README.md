@@ -1,4 +1,4 @@
-# `@iamcosta/url-params-hook`
+# `url-params-hook`
 
 > What about map an object to url search parameters? :)
 
@@ -11,7 +11,7 @@ npm install @iamcosta/url-params-hook
 ## Usage
 
 ```ts
-import { useUrlParams } from '@iamcosta/url-params-hook';
+import { useUrlParams } from  "@iamcosta/url-params-hook";
 
 // ...
 type YourType = {
