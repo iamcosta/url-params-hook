@@ -1,6 +1,6 @@
 {
   "name": "@iamcosta/url-params-hook",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Map object props to url search parameters",
   "main": "index.js",
   "scripts": {
@@ -23,9 +23,10 @@
   },
   "homepage": "https://github.com/iamcosta/url-params-hook#readme",
   "devDependencies": {
+    "@types/react": "^18.3.3",
     "typescript": "^5.4.5"
   },
   "dependencies": {
-    "react-router-dom": "^6.23.1"
+    "react": "^18.3.1"
   }
 }
