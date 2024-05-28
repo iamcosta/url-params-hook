@@ -1,6 +1,6 @@
 {
   "name": "@iamcosta/url-params-hook",
-  "version": "2.0.83",
+  "version": "2.0.84",
   "description": "Map object props to url search parameters",
   "source": "src/index.ts",
   "type": "module",
@@ -30,7 +30,7 @@
     "hook"
   ],
   "author": "Iam Barroso",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/iamcosta/url-params-hook/issues"
   },
