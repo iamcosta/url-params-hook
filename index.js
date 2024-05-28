@@ -30,6 +30,9 @@ export function useUrlParams() {
         }
         setValues(obj);
     }, []);
+    function clear() {
+        setValues({});
+    }
     useEffect(() => {
         toValues();
         const handleUrlChange = () => {
@@ -53,6 +56,7 @@ export function useUrlParams() {
     return {
         values,
         onChange,
+        clear,
     };
 }
 //# sourceMappingURL=index.js.map

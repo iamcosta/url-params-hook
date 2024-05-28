@@ -36,6 +36,10 @@ export function useUrlParams<T extends ParamsProps>() {
     setValues(obj);
   }, []);
 
+  function clear() {
+    setValues({} as T);
+  }
+
   useEffect(() => {
     toValues();
     const handleUrlChange = () => {
@@ -64,5 +68,6 @@ export function useUrlParams<T extends ParamsProps>() {
   return {
     values,
     onChange,
+    clear,
   };
 }
