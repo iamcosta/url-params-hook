@@ -4,7 +4,8 @@ exports.useUrlParams = void 0;
 const react_1 = require("react");
 function useUrlParams() {
     const [values, setValues] = (0, react_1.useState)({});
-    function onChange(data) {
+    const prevParams = (0, react_1.useRef)(new URLSearchParams());
+    function deserialize(data) {
         const searchParams = new URLSearchParams(window.location.search);
         for (const [k, v] of Object.entries(data)) {
             if (typeof v !== "boolean" && !v && v !== 0) {
@@ -15,9 +16,12 @@ function useUrlParams() {
             }
             searchParams.set(k, String(v).trim());
         }
+        if (prevParams.current.toString() === searchParams.toString())
+            return;
         window.history.pushState({}, window.document.title, `?${searchParams}`);
+        prevParams.current = searchParams;
     }
-    const toValues = (0, react_1.useCallback)(() => {
+    const serialize = (0, react_1.useCallback)(() => {
         const url = new URL(window.location.href);
         const params = new URLSearchParams(url.search);
         const obj = {};
@@ -37,9 +41,8 @@ function useUrlParams() {
         setValues({});
     }
     (0, react_1.useEffect)(() => {
-        toValues();
         const handleUrlChange = () => {
-            toValues();
+            serialize();
         };
         window.addEventListener("popstate", handleUrlChange);
         const pushState = window.history.pushState;
@@ -55,10 +58,13 @@ function useUrlParams() {
         return () => {
             window.removeEventListener("popstate", handleUrlChange);
         };
-    }, [toValues]);
+    }, [serialize]);
+    (0, react_1.useEffect)(() => {
+        serialize();
+    }, [serialize]);
     return {
         values,
-        onChange,
+        onChange: deserialize,
         clear,
     };
 }

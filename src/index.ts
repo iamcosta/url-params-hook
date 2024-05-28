@@ -1,12 +1,13 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 export type ParamsProps = {
   [k: string]: unknown;
 };
 export function useUrlParams<T extends ParamsProps>() {
   const [values, setValues] = useState<T>({} as T);
+  const prevParams = useRef(new URLSearchParams());
 
-  function onChange(data: T) {
+  function deserialize(data: T) {
     const searchParams = new URLSearchParams(window.location.search);
     for (const [k, v] of Object.entries(data)) {
       if (typeof v !== "boolean" && !v && v !== 0) {
@@ -17,10 +18,12 @@ export function useUrlParams<T extends ParamsProps>() {
       }
       searchParams.set(k, String(v).trim());
     }
+    if (prevParams.current.toString() === searchParams.toString()) return;
     window.history.pushState({}, window.document.title, `?${searchParams}`);
+    prevParams.current = searchParams;
   }
 
-  const toValues = useCallback(() => {
+  const serialize = useCallback(() => {
     const url = new URL(window.location.href);
     const params = new URLSearchParams(url.search);
     const obj: T = {} as T;
@@ -41,9 +44,8 @@ export function useUrlParams<T extends ParamsProps>() {
   }
 
   useEffect(() => {
-    toValues();
     const handleUrlChange = () => {
-      toValues();
+      serialize();
     };
 
     window.addEventListener("popstate", handleUrlChange);
@@ -63,11 +65,15 @@ export function useUrlParams<T extends ParamsProps>() {
     return () => {
       window.removeEventListener("popstate", handleUrlChange);
     };
-  }, [toValues]);
+  }, [serialize]);
+
+  useEffect(() => {
+    serialize();
+  }, [serialize])
 
   return {
     values,
-    onChange,
+    onChange: deserialize,
     clear,
   };
 }
