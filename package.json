@@ -1,13 +1,16 @@
 {
   "name": "@iamcosta/url-params-hook",
-  "version": "2.0.6",
+  "version": "2.0.7",
   "description": "Map object props to url search parameters",
   "source": "src/index.ts",
-  "types": "./build/types/index.d.ts",
-  "module": "./build/esm/index.js",
-  "main": "./build/cjs/index.js",
   "exports": {
-    "./package.json": "./package.json"
+    "./package.json": "./package.json",
+    ".": {
+      "types": "./build/types/index.d.ts",
+      "import": "./build/esm/index.js",
+      "require": "./build/cjs/index.js",
+      "default": "./build/esm/index.js"
+    }
   },
   "scripts": {
     "compile": "tsc -b ./tsconfig.cjs.json ./tsconfig.esm.json ./tsconfig.types.json",
