@@ -31,6 +31,7 @@ export function useUrlParams() {
         setValues(obj);
     }, []);
     useEffect(() => {
+        toValues();
         const handleUrlChange = () => {
             toValues();
         };
