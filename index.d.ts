@@ -1,8 +1,8 @@
-export interface ParamValues {
+export type ParamsProps = {
     [k: string]: unknown;
-}
-export declare function useUrlParams<T extends ParamValues>(): {
-    params: T;
+};
+export declare function useUrlParams<T extends ParamsProps>(): {
+    values: T;
     onChange: (data: T) => void;
 };
 //# sourceMappingURL=index.d.ts.map
