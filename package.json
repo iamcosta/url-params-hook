@@ -1,6 +1,6 @@
 {
   "name": "@iamcosta/url-params-hook",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Map object props to url search parameters",
   "source": "src/index.ts",
   "exports": {
