@@ -20,7 +20,10 @@ type YourType = {
     someProp: string;
     anotherProp: number;
 }
-const { values, onChange } = useUrlParams<YourType>();
+const { values, onChange } = useUrlParams<YourType>({
+  ignoreKeys: ["keys", "of", "YourType", "to", "be", "ignored"]
+});
+// ignoreKeys is optional...
 
 // ...
 
