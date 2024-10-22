@@ -2,12 +2,15 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.useUrlParams = void 0;
 const react_1 = require("react");
-function useUrlParams() {
+function useUrlParams(props) {
     const [values, setValues] = (0, react_1.useState)({});
     const prevParams = (0, react_1.useRef)(new URLSearchParams());
     function deserialize(data) {
+        var _a;
         const searchParams = new URLSearchParams(window.location.search);
         for (const [k, v] of Object.entries(data)) {
+            if ((_a = props === null || props === void 0 ? void 0 : props.ignoreKeys) === null || _a === void 0 ? void 0 : _a.includes(k))
+                continue;
             if (typeof v !== "boolean" && !v && v !== 0) {
                 if (searchParams.has(k)) {
                     searchParams.delete(k);
@@ -22,11 +25,14 @@ function useUrlParams() {
         prevParams.current = searchParams;
     }
     const serialize = (0, react_1.useCallback)(() => {
+        var _a;
         const url = new URL(window.location.href);
         const params = new URLSearchParams(url.search);
         const obj = {};
         for (const [k, v] of params.entries()) {
             let value = v;
+            if ((_a = props === null || props === void 0 ? void 0 : props.ignoreKeys) === null || _a === void 0 ? void 0 : _a.includes(k))
+                continue;
             if (v === "true" || v === "false") {
                 value = v === "true";
             }

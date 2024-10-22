@@ -3,13 +3,17 @@ import { useCallback, useEffect, useRef, useState } from "react";
 export type ParamsProps = {
   [k: string]: unknown;
 };
-export function useUrlParams<T extends ParamsProps>() {
+type UrlParamsProps<T> = {
+  ignoreKeys: (keyof T)[]
+}
+export function useUrlParams<T extends ParamsProps>(props?: Partial<UrlParamsProps<T>>) {
   const [values, setValues] = useState<T>({} as T);
   const prevParams = useRef(new URLSearchParams());
 
   function deserialize(data: T) {
     const searchParams = new URLSearchParams(window.location.search);
     for (const [k, v] of Object.entries(data)) {
+      if (props?.ignoreKeys?.includes(k)) continue;
       if (typeof v !== "boolean" && !v && v !== 0) {
         if (searchParams.has(k)) {
           searchParams.delete(k);
@@ -29,6 +33,7 @@ export function useUrlParams<T extends ParamsProps>() {
     const obj: T = {} as T;
     for (const [k, v] of params.entries()) {
       let value: unknown = v;
+      if (props?.ignoreKeys?.includes(k)) continue;
       if (v === "true" || v === "false") {
         value = v === "true";
       } else if (!v.startsWith("0") && !isNaN(+v) && !isNaN(parseFloat(v))) {
